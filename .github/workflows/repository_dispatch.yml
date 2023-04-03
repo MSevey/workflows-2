@@ -1,0 +1,30 @@
+name: Repository Dispatch
+on:
+  repository_dispatch:
+    types: [my-event]
+  workflow_dispatch:
+    inputs:
+      myEvent:
+        description: "Dispatch Event Type"
+        required: true
+        type: choice
+        options:
+          - my-event
+          - fail
+          - pass-other
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+      - run: |
+          echo "github.event"
+          echo ${{ github.event.client_payload.sha }}
+      - run: |
+          echo "github.event"
+          echo ${{ github.event }}
+      - run: |
+          echo "inputs.myEvent"
+          echo ${{ inputs.myEvent }}
