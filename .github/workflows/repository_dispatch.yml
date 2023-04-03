@@ -1,7 +1,7 @@
 name: Repository Dispatch
 on:
   repository_dispatch:
-    types: [my-event]
+    types: [my-event, fail]
   workflow_dispatch:
     inputs:
       myEvent:
@@ -23,8 +23,14 @@ jobs:
           echo "github.event"
           echo ${{ github.event.client_payload.sha }}
       - run: |
-          echo "github.event"
-          echo ${{ github.event }}
+          echo "github.event.client_payload"
+          echo ${{ github.event.client_payload }}
       - run: |
           echo "inputs.myEvent"
           echo ${{ inputs.myEvent }}
+
+  failHob:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.myEvent == 'fail' }}
+    steps:
+      - run: echo exit(1)
