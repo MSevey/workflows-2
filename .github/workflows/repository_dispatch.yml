@@ -4,16 +4,6 @@ on:
   workflow_dispatch:
     inputs:
       distinct_id:
-        # description: "input from caller"
-        # type: string
-    #   myEvent:
-    #     description: "Dispatch Event Type"
-    #     required: true
-    #     type: choice
-    #     options:
-    #       - my-event
-    #       - fail
-    #       - pass-other
 
 jobs:
   test:
@@ -21,5 +11,3 @@ jobs:
     steps:
       - name: echo distinct ID github.event.inputs.distinct_id
         run: echo ${{ github.event.inputs.distinct_id }}
-      - name: echo distinct ID inputs.distinct_id
-        run: echo ${{ inputs.distinct_id }}
