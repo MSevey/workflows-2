@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       distinct_id:
+      key:
 
 jobs:
   test:
@@ -11,3 +12,4 @@ jobs:
       - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
         run: |
           echo ${{ github.event.inputs.distinct_id }}
+          echo 'my input key ${{ inputs.key }}'
