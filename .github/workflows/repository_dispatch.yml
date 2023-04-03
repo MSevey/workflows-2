@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       distinct_id:
-        description: "input from caller"
-        type: string
+        # description: "input from caller"
+        # type: string
     #   myEvent:
     #     description: "Dispatch Event Type"
     #     required: true
