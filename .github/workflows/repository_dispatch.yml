@@ -1,36 +1,25 @@
 name: Repository Dispatch
 on:
-  repository_dispatch:
-    types: [my-event, fail]
+  push:
   workflow_dispatch:
     inputs:
-      myEvent:
-        description: "Dispatch Event Type"
-        required: true
-        type: choice
-        options:
-          - my-event
-          - fail
-          - pass-other
-jobs:
-  myEvent:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.client_payload.ref }}
-      - run: |
-          echo "github.event"
-          echo ${{ github.event.client_payload.sha }}
-      - run: |
-          echo "github.event.client_payload"
-          echo ${{ github.event.client_payload }}
-      - run: |
-          echo "inputs.myEvent"
-          echo ${{ inputs.myEvent }}
+      distinct_id:
+        description: "input from caller"
+        type: string
+    #   myEvent:
+    #     description: "Dispatch Event Type"
+    #     required: true
+    #     type: choice
+    #     options:
+    #       - my-event
+    #       - fail
+    #       - pass-other
 
-  failJob:
+jobs:
+  test:
     runs-on: ubuntu-latest
-    if: ${{ inputs.myEvent == 'fail' }}
     steps:
-      - run: echo exit(1)
+      - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
+        run: echo ${{ github.event.inputs.distinct_id }}
+      - name: echo distinct ID ${{ inputs.distinct_id }}
+        run: echo ${{ inputs.distinct_id }}
