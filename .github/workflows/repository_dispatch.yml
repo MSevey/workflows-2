@@ -13,5 +13,3 @@ jobs:
         run: |
           echo ${{ github.event.inputs.distinct_id }}
           echo 'my input key ${{ inputs.key }}'
-      - name: Faile
-        run: exit 1
